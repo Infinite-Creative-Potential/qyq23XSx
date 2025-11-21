@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>知识分享与正能量随笔</title>
+    <title>智识笔记 | 知识分享与正能量随笔</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -24,12 +24,14 @@
             --text-light: #6c757d;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --radius: 12px;
+            --transition: all 0.3s ease;
         }
         
         body {
             background-color: #f5f7fa;
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -42,7 +44,7 @@
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
@@ -67,15 +69,18 @@
         }
         
         h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
             font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         /* 导航栏 */
@@ -98,6 +103,9 @@
             font-weight: 700;
             font-size: 1.5rem;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .nav-links {
@@ -109,7 +117,7 @@
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
             position: relative;
         }
         
@@ -125,7 +133,7 @@
             width: 0;
             height: 2px;
             background-color: var(--primary);
-            transition: width 0.3s;
+            transition: var(--transition);
         }
         
         .nav-links a:hover::after {
@@ -153,7 +161,8 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: var(--transition);
+            position: relative;
         }
         
         .card:hover {
@@ -165,6 +174,20 @@
             padding: 1.5rem;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 40px 40px 0;
+            border-color: transparent rgba(255,255,255,0.2) transparent transparent;
         }
         
         .card-body {
@@ -193,11 +216,22 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
+            position: relative;
         }
         
         .read-more:hover {
             color: var(--accent);
+        }
+        
+        .read-more::after {
+            content: "→";
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover::after {
+            margin-left: 10px;
         }
         
         /* 侧边栏 */
@@ -212,6 +246,12 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .sidebar-widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
         
         .widget-title {
@@ -220,6 +260,9 @@
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--light);
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         /* 正能量语录 */
@@ -227,7 +270,7 @@
             background: linear-gradient(135deg, #ffd89b, #19547b);
             color: white;
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 2.5rem;
             text-align: center;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
@@ -252,6 +295,7 @@
             margin-bottom: 1rem;
             position: relative;
             z-index: 2;
+            line-height: 1.8;
         }
         
         .quote-author {
@@ -268,6 +312,11 @@
             margin-bottom: 0.8rem;
             padding-bottom: 0.8rem;
             border-bottom: 1px solid var(--light);
+            transition: var(--transition);
+        }
+        
+        .categories li:hover {
+            transform: translateX(5px);
         }
         
         .categories a {
@@ -275,7 +324,7 @@
             color: var(--text);
             display: flex;
             justify-content: space-between;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
         
         .categories a:hover {
@@ -297,18 +346,31 @@
             box-shadow: var(--shadow);
             padding: 2rem;
             margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        
+        .knowledge-record:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
         
         .record-title {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .record-item {
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--light);
+            transition: var(--transition);
+        }
+        
+        .record-item:hover {
+            padding-left: 10px;
         }
         
         .record-item:last-child {
@@ -321,6 +383,9 @@
             font-size: 0.9rem;
             color: var(--text-light);
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .record-content {
@@ -369,7 +434,7 @@
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
         
         .footer-links a:hover {
@@ -392,11 +457,12 @@
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
             background: var(--accent);
+            transform: translateY(-3px);
         }
         
         .copyright {
@@ -406,6 +472,29 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #adb5bd;
             font-size: 0.9rem;
+        }
+        
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
         
         /* 响应式设计 */
@@ -437,21 +526,39 @@
                 font-size: 2.2rem;
             }
         }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
     </style>
 </head>
 <body>
     <!-- 头部 -->
     <header>
         <div class="container header-content">
-            <h1>知识分享与正能量随笔</h1>
-            <p class="tagline">记录知识，传递智慧，分享正能量</p>
+            <h1 class="fade-in">知识分享与正能量随笔</h1>
+            <p class="tagline fade-in delay-1">记录知识，传递智慧，分享正能量 - 探索科学、玄学、数据统计、宇宙与AI的奥秘</p>
         </div>
     </header>
     
     <!-- 导航栏 -->
     <nav>
         <div class="container nav-container">
-            <div class="logo">智识笔记</div>
+            <div class="logo">
+                <i class="fas fa-brain"></i> 智识笔记
+            </div>
             <div class="nav-links">
                 <a href="#"><i class="fas fa-home"></i> 首页</a>
                 <a href="#"><i class="fas fa-book"></i> 知识库</a>
@@ -464,7 +571,7 @@
     
     <div class="container">
         <!-- 正能量语录 -->
-        <div class="positive-quote">
+        <div class="positive-quote fade-in delay-2">
             <p class="quote-text">知识就像内功，积累越深厚，发挥出的力量越大。每天进步一点点，终将成就非凡。</p>
             <p class="quote-author">—— 智识笔记</p>
         </div>
@@ -474,79 +581,108 @@
             <!-- 左侧内容 -->
             <div class="left-content">
                 <!-- 知识卡片 -->
-                <h2 style="margin-bottom: 1.5rem; color: var(--primary);">最新知识分享</h2>
+                <h2 style="margin-bottom: 1.5rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-star"></i> 最新知识分享
+                </h2>
                 <div class="knowledge-cards">
-                    <div class="card">
+                    <div class="card fade-in delay-1">
                         <div class="card-header">
-                            <h3 class="card-title">时间管理的艺术</h3>
+                            <h3 class="card-title">量子纠缠与意识关联</h3>
                             <div class="card-meta">
                                 <span><i class="far fa-calendar"></i> 2023-10-15</span>
-                                <span><i class="far fa-folder"></i> 个人成长</span>
+                                <span><i class="far fa-folder"></i> 玄学与科学</span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="card-content">
-                                <p>有效的时间管理不仅仅是安排日程，更是一种生活态度。学会区分重要与紧急事务，合理分配精力，才能实现高效工作与生活的平衡。</p>
+                                <p>量子纠缠现象揭示了微观粒子之间的神秘联系，这种非局域性关联是否与人类意识存在某种联系？一些前沿科学家正在探索意识与量子物理之间的关系。</p>
                             </div>
-                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="read-more">阅读更多</a>
                         </div>
                     </div>
                     
-                    <div class="card">
+                    <div class="card fade-in delay-2">
                         <div class="card-header">
-                            <h3 class="card-title">深度工作法</h3>
+                            <h3 class="card-title">AI大模型的涌现能力</h3>
                             <div class="card-meta">
                                 <span><i class="far fa-calendar"></i> 2023-10-10</span>
-                                <span><i class="far fa-folder"></i> 工作效率</span>
+                                <span><i class="far fa-folder"></i> AI与程序</span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="card-content">
-                                <p>在信息爆炸的时代，专注力成为稀缺资源。深度工作法通过创造无干扰环境，训练大脑集中注意力，从而在更短时间内完成高质量工作。</p>
+                                <p>当AI模型达到一定规模时，会突然展现出训练数据中未明确包含的能力，这种现象被称为"涌现"。了解这一现象对AI未来发展具有重要意义。</p>
                             </div>
-                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="read-more">阅读更多</a>
                         </div>
                     </div>
                     
-                    <div class="card">
+                    <div class="card fade-in delay-3">
                         <div class="card-header">
-                            <h3 class="card-title">积极心理学实践</h3>
+                            <h3 class="card-title">数据统计中的认知偏差</h3>
                             <div class="card-meta">
                                 <span><i class="far fa-calendar"></i> 2023-10-05</span>
-                                <span><i class="far fa-folder"></i> 心理健康</span>
+                                <span><i class="far fa-folder"></i> 数据统计</span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="card-content">
-                                <p>积极心理学关注人类优势与幸福感，通过感恩日记、优势识别、正念练习等方法，帮助我们培养积极心态，提升生活满意度。</p>
+                                <p>人类大脑在处理统计信息时存在多种认知偏差，如确认偏误、幸存者偏差等。了解这些偏差有助于我们更客观地解读数据。</p>
                             </div>
-                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="read-more">阅读更多</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card fade-in delay-4">
+                        <div class="card-header">
+                            <h3 class="card-title">暗物质与宇宙结构</h3>
+                            <div class="card-meta">
+                                <span><i class="far fa-calendar"></i> 2023-09-28</span>
+                                <span><i class="far fa-folder"></i> 宇宙探索</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p>暗物质虽然不可见，却构成了宇宙大部分质量，它的分布决定了星系和星系团的形成。探索暗物质是理解宇宙大尺度结构的关键。</p>
+                            </div>
+                            <a href="#" class="read-more">阅读更多</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 知识记录 -->
-                <div class="knowledge-record">
-                    <h2 class="record-title">知识记录随笔</h2>
+                <div class="knowledge-record fade-in delay-5">
+                    <h2 class="record-title">
+                        <i class="fas fa-pen-fancy"></i> 知识记录随笔
+                    </h2>
                     
                     <div class="record-item">
-                        <div class="record-date">2023年10月18日</div>
+                        <div class="record-date">
+                            <i class="far fa-calendar"></i> 2023年10月18日
+                        </div>
                         <div class="record-content">
                             <p>今天学习了一个有趣的概念——"反脆弱"。与脆弱相对，反脆弱性是指那些不仅能抵抗冲击，还能从冲击中获益的事物。这让我思考如何在个人成长中培养反脆弱性，将挑战转化为成长机会。</p>
+                            <p style="margin-top: 10px;">联想到塔勒布的黑天鹅理论，我们生活在一个充满不确定性的世界，培养反脆弱性比追求稳定更为重要。</p>
                         </div>
                     </div>
                     
                     <div class="record-item">
-                        <div class="record-date">2023年10月12日</div>
+                        <div class="record-date">
+                            <i class="far fa-calendar"></i> 2023年10月12日
+                        </div>
                         <div class="record-content">
                             <p>阅读了关于"思维模型"的内容，意识到我们每个人都在使用各种思维模型来理解和应对世界。多元思维模型就像工具箱里的不同工具，面对不同问题选择合适工具，能大大提高决策质量。</p>
+                            <p style="margin-top: 10px;">查理·芒格强调要掌握不同学科的重要模型，形成"格栅思维"，这让我决定系统学习心理学、物理学和生物学的基础模型。</p>
                         </div>
                     </div>
                     
                     <div class="record-item">
-                        <div class="record-date">2023年10月5日</div>
+                        <div class="record-date">
+                            <i class="far fa-calendar"></i> 2023年10月5日
+                        </div>
                         <div class="record-content">
                             <p>了解到"成长型思维"与"固定型思维"的区别。拥有成长型思维的人相信能力可以通过努力培养，这使他们更愿意接受挑战，从失败中学习。这提醒我要在日常中培养成长型思维。</p>
+                            <p style="margin-top: 10px;">德韦克的研究表明，仅仅了解这两种思维模式的差异，就能显著改变一个人的学习和成就表现。</p>
                         </div>
                     </div>
                 </div>
@@ -555,9 +691,11 @@
             <!-- 右侧侧边栏 -->
             <div class="sidebar">
                 <!-- 关于我 -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">关于我</h3>
-                    <p>一名热爱学习和分享的知识探索者，相信知识改变命运，积极心态塑造人生。</p>
+                <div class="sidebar-widget fade-in delay-3">
+                    <h3 class="widget-title">
+                        <i class="fas fa-user"></i> 关于我
+                    </h3>
+                    <p>一名热爱学习和分享的知识探索者，相信知识改变命运，积极心态塑造人生。专注于科学、玄学、数据统计、宇宙探索和AI技术的研究与分享。</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-weixin"></i></a>
                         <a href="#"><i class="fab fa-github"></i></a>
@@ -567,32 +705,54 @@
                 </div>
                 
                 <!-- 知识分类 -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">知识分类</h3>
+                <div class="sidebar-widget fade-in delay-4">
+                    <h3 class="widget-title">
+                        <i class="fas fa-folder"></i> 知识分类
+                    </h3>
                     <ul class="categories">
                         <li>
-                            <a href="#">个人成长 <span class="category-count">12</span></a>
+                            <a href="#">玄学与科学 <span class="category-count">12</span></a>
                         </li>
                         <li>
-                            <a href="#">工作效率 <span class="category-count">8</span></a>
+                            <a href="#">AI与程序 <span class="category-count">8</span></a>
                         </li>
                         <li>
-                            <a href="#">心理健康 <span class="category-count">6</span></a>
+                            <a href="#">数据统计 <span class="category-count">6</span></a>
                         </li>
                         <li>
-                            <a href="#">学习方法 <span class="category-count">10</span></a>
+                            <a href="#">宇宙探索 <span class="category-count">10</span></a>
                         </li>
                         <li>
                             <a href="#">思维模型 <span class="category-count">7</span></a>
+                        </li>
+                        <li>
+                            <a href="#">个人成长 <span class="category-count">15</span></a>
                         </li>
                     </ul>
                 </div>
                 
                 <!-- 正能量语录 -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">每日正能量</h3>
+                <div class="sidebar-widget fade-in delay-5">
+                    <h3 class="widget-title">
+                        <i class="fas fa-heart"></i> 每日正能量
+                    </h3>
                     <p style="font-style: italic; color: var(--primary);">"生活不是等待风暴过去，而是学会在雨中跳舞。"</p>
                     <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">困难是成长的机会，挑战是进步的阶梯。保持积极心态，每一天都是新的开始。</p>
+                </div>
+                
+                <!-- 热门标签 -->
+                <div class="sidebar-widget fade-in delay-5">
+                    <h3 class="widget-title">
+                        <i class="fas fa-tags"></i> 热门标签
+                    </h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span style="background: var(--light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">量子物理</span>
+                        <span style="background: var(--light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">机器学习</span>
+                        <span style="background: var(--light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">数据分析</span>
+                        <span style="background: var(--light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">宇宙奥秘</span>
+                        <span style="background: var(--light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">心灵成长</span>
+                        <span style="background: var(--light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;">正念冥想</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -632,8 +792,12 @@
             </div>
         </div>
     </footer>
-</body>
-</html>
+    
+    <!-- 主题切换按钮 -->
+    <div class="theme-toggle">
+        <i class="fas fa-palette"></i>
+    </div>
+
     <script>
         (function () {
             function init() {
@@ -648,8 +812,39 @@
             }
             init();
         })();
+        // 简单的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 滚动动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察所有卡片和组件
+            document.querySelectorAll('.card, .sidebar-widget, .knowledge-record').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+            
+            // 主题切换功能
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-theme');
+                // 这里可以添加更复杂的主题切换逻辑
+                alert('主题切换功能开发中...');
+            });
+        });
     </script>
-
 </body>
-
 </html>
